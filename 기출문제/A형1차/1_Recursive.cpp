@@ -17,6 +17,7 @@ int P;
 int heightA[21];
 int heightB[21];
 
+
 int recursive(int depth, int p, int height, bool isAB)
 {
 	if (depth == N)

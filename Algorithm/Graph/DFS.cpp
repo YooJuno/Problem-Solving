@@ -16,13 +16,18 @@ using namespace std;
 
 */
 
+0 0 1 0 1
+1 0 0 1 0
+0 1 1 0 0
+0 0 1 1 0
+
 int nodeCnt;
 int arr[1001][1001];
 int st, en;
 bool visited[1001];
 
 
-int func(int now, int cnt)
+int DFS(int now, int cnt)
 {
     if(now == en)
     {
@@ -38,7 +43,7 @@ int func(int now, int cnt)
 
         visited[i] = true;
 
-        int result = func(i, cnt + 1);
+        int result = DFS(i, cnt + 1);
         if(result > maxCnt)
         {
             maxCnt = result;
@@ -64,6 +69,6 @@ auto main() -> int
     
     cin >> st >> en;
     visited[st] = true;
-    cout << func(st, 1);
+    cout << DFS(st, 1);
     return 0;
 }
