@@ -61,6 +61,5 @@ auto main() -> int
 
     cout << BFS(1);
     
-    
     return 0;
 }
