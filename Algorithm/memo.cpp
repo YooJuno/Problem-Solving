@@ -16,7 +16,7 @@ int BFS(int src)
 {
     int result = 0;
     deque<int> dq;
-    isVisited[src] = true
+    isVisited[src] = true;
     dq.push_back(src);
 
     while(!dq.empty())
@@ -24,11 +24,9 @@ int BFS(int src)
         int now = dq.front();
         dq.pop_front();
         result++;
-        cout << "now : " << now;
         
         for(auto next : v[now])
         {
-            cout << " -> " << next;
             if(isVisited[next] == true) continue;
             isVisited[next] = true;
 
@@ -37,7 +35,6 @@ int BFS(int src)
 
             dq.push_back(next);
         }
-        cout << endl;
     }
 
     return result;
