@@ -1,65 +1,77 @@
 #include <iostream>
-#include <vector>
 #include <queue>
 
 using namespace std;
 
-int N; // 역의 수
-int K; // 하나의 하이퍼 튜브가 연결하는 역의 수
-int M; // 하이퍼 튜브의 수
-
-vector<int> v[100001 + 1000];
-bool isVisited[100001 + 1000];
-
-int BFS(int src)
+struct Pos
 {
-    int result = -1;
-    queue<int> q;
-    q.push(src);
+    int y;
+    int x;
+};
 
-    isVisited[src];
+int N;
+int M;
+
+bool map[101][101];
+int dy[4] = {1, 0, -1, 0};
+int dx[4] = {0, -1, 0, 1};
+
+void BFS(Pos src)
+{
+    queue<Pos> q;
+    q.push(src);
+    map[src.y][src.x] = false;
 
     while(!q.empty())
     {
-        int now = q.front();
+        Pos now = q.front();
         q.pop();
 
-        for(auto next : v[now])
+        for(auto i = 0; i <4 ; i++)
         {
-            if(isVisited[next] == true) 
+            Pos next = {now.y + dy[i], now.x + dx[i]};
+            if(next.y < 0 || next.y > N-1 || next.x < 0 || next.x > M-1)
             {
                 continue;
             }
-            if(next == N)
+            if(map[next.y][next.x] == false) 
             {
-                return result + 1;
-            }
-
-            isVisited[next] = true;
-            result++;
+                continue;
+            }    
             
+            map[next.y][next.x] = false;
             q.push(next);
         }
     }
 
-    return -1;
 }
 
 auto main() -> int
 {
-    cin >> N >> K >> M;
+    cin >> N >> M;
 
-    for(auto i = 0; i < M; i++)
+    for(auto i = 0; i < N; i++)
     {
-        for(auto j = 0; j < K; j++)
+        for(auto j = 0; j < M; j++)
         {
-            int station; cin >> station;
-            v[i+100000].push_back(station);
-            v[station].push_back(i+100000);
+            cin >> map[i][j];
+        }
+    }   
+    
+    int cnt = 0;
+    for(auto i = 0; i < N; i++)
+    {
+        for(auto j = 0; j < M; j++)
+        {
+            if(map[i][j])
+            {
+                BFS({i, j});
+                cnt++;
+            }
         }
     }
 
-    cout << BFS(1);
+    cout << cnt;
     
     return 0;
 }
