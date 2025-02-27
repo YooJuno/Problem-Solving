@@ -1,33 +1,23 @@
 #include <iostream>
-#include <vector>
-#include <queue>
 
 using namespace std;
 
 int N;
 int M;
-int P;
-vector<pair<int, int>> graph[1001];
-
-void Dijkstra()
-{
-
-
-
-}
-
 
 int main()
 {
-    cin >> N >> M >> P;
+    cin >> N >> M;
+    cin >> A >> B >> C >> D >> E;
+    
     for(int i = 0; i < M; i++)
     {
-        int src, dst;
-        cin >> src >> dst >> time;
+        int A, B, C, D, E;
+        cin >> A >> B >> C >> D >> E;
 
-        graph[src].push_back({time, dst});
+        
     }
-
+    
     
     return 0;
 }
