@@ -35,9 +35,9 @@ void Dijkstra(int src)
             if(dist[v] > dist[u] + weight)
             {
                 dist[v] = dist[u] + weight;
+                pq.push({dist[v], v});
             }
 
-            pq.push({dist[v], v});
         }
     }
 
