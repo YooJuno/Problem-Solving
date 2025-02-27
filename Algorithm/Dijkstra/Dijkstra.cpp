@@ -37,10 +37,8 @@ void Dijkstra(int src)
                 dist[v] = dist[u] + weight;
                 pq.push({dist[v], v});
             }
-
         }
     }
-
 }
 
 int main()
