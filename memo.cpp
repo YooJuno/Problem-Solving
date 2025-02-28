@@ -8,7 +8,6 @@ vector<pair<int, int>> graph[1001];
 int N;
 int M;
 int dist[1001];
-int 
 vector<int> route;
 
 int Dijkstra(int src, int dst)
@@ -48,6 +47,7 @@ int Dijkstra(int src, int dst)
         }
     }
     cout << endl;
+    
     return dist[dst];
 }
 
