@@ -2,7 +2,12 @@
 
 using namespace std;
 
-auto main() -> int
+/*
+점화식을 찾아라!
+
+*/
+
+int main()
 {
     
     
