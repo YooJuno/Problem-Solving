@@ -1,68 +1,80 @@
 #include <iostream>
-#include <vector>
-#include <queue>
 
 using namespace std;
 
-vector<pair<int, int>> graph[1001];
 int N;
-int M;
-int dist[1001];
-vector<int> route;
+int parent[1000];
+bool graph[1000][1000];
 
-int Dijkstra(int src, int dst)
+int find(int x)
 {
-    for(int i = 1; i <= N; i++)
+    if(parent[x] == x)
     {
-        dist[i] = 1e9;
+        return x;
     }
-    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
-    pq.push({0, src});
-    dist[src] = 0;
 
-    while(!pq.empty())
+    return parent[x] = find(parent[x]);
+}
+
+int unite(int a, int b)
+{
+    int rootA = find(a);
+    int rootB = find(b);
+    printf("%d %d\n", rootA, rootB);
+    if(rootA == rootB)
     {
-        int cost = pq.top().first;
-        int u = pq.top().second;
-        pq.pop();
-        
-        if(cost > dist[u])
-        {
-            continue;
-        }
-        
-        int minCost = 1e9;
-        
-        for(auto neighbor : graph[u])
-        {
-            int weight = neighbor.first;
-            int v = neighbor.second;
-            
-            if(dist[v] > dist[u] + weight)
-            {
-                cout << u << ' ';
-                dist[v] = dist[u] + weight;
-                pq.push({dist[v], v});
-            }
-        }
+        return true;
     }
-    cout << endl;
-    
-    return dist[dst];
+
+    parent[rootB] = rootA;
+    return false;
 }
 
 int main()
 {
-    cin >> N >> M;
-    for(int i = 0; i < M; i++)
+    cin >> N;
+    for (int i = 0; i < N; i++)
     {
-        int A, B, C;
-        cin >> A >> B >> C;
-        graph[A].push_back({C, B});
-        graph[B].push_back({C, A});
+        parent[i] = i;
+    }
+    for (int i = 0; i < N; i++)
+    {
+        for (int j = 0; j < N; j++)
+        {
+            cin >> graph[i][j];
+        }
     }
 
-    cout << Dijkstra(1, N) << endl;
-    
+    cout << "parent : ";
+    for (int i = 0; i < N; i++)
+    {
+        cout << parent[i] << ' ';
+    }
+    cout << endl;
+
+    for (int i = 0; i < N-1; i++)
+    {
+        for (int j = i+1; j < N; j++)
+        {
+            if(graph[i][j] == true)
+            {
+                printf("i:%d j:%d => ", i, j);
+                unite(i, j);
+                cout << "parent : ";
+                for (int k = 0; k < N; k++)
+                {
+                    cout << parent[k] << ' ';
+                }
+                cout << endl;
+                // if(unite(i, j))
+                // {
+                //     cout << "WARNING\n";
+                //     return 0;
+                // }
+            }
+        }   
+    }
+        
+    // cout << "STABLE\n";
     return 0;
 }
