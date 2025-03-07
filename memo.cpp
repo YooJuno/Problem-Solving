@@ -1,68 +1,44 @@
 #include <iostream>
 #include <vector>
-#include <queue>
+#include <algorithm>
 
 using namespace std;
 
-vector<pair<int, int>> graph[1001];
 int N;
-int M;
-int dist[1001];
-vector<int> route;
+vector<pair<int, int>> v;
 
-int Dijkstra(int src, int dst)
+bool cmp(pair<int, int> a, pair<int, int> b)
 {
-    for(int i = 1; i <= N; i++)
-    {
-        dist[i] = 1e9;
-    }
-    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
-    pq.push({0, src});
-    dist[src] = 0;
-
-    while(!pq.empty())
-    {
-        int cost = pq.top().first;
-        int u = pq.top().second;
-        pq.pop();
-        
-        if(cost > dist[u])
-        {
-            continue;
-        }
-        
-        int minCost = 1e9;
-        
-        for(auto neighbor : graph[u])
-        {
-            int weight = neighbor.first;
-            int v = neighbor.second;
-            
-            if(dist[v] > dist[u] + weight)
-            {
-                cout << u << ' ';
-                dist[v] = dist[u] + weight;
-                pq.push({dist[v], v});
-            }
-        }
-    }
-    cout << endl;
-    
-    return dist[dst];
+    return a.second < b.second;
 }
 
-int main()
+auto main() -> int
 {
-    cin >> N >> M;
-    for(int i = 0; i < M; i++)
+    cin >> N;
+    for (int i = 0; i < N; i++)
     {
-        int A, B, C;
-        cin >> A >> B >> C;
-        graph[A].push_back({C, B});
-        graph[B].push_back({C, A});
+        int a, b;
+        cin >> a >> b;
+        v.push_back({a, b});
     }
 
-    cout << Dijkstra(1, N) << endl;
+    sort(v.begin(), v.end(), cmp);
+
+
+    int src = 0, dst = 0;
+    int cnt = 0;
+    for(auto e : v)
+    {
+        src = e.first;
+
+        if(src >= dst)
+        {
+            cnt++;
+            dst = e.second;
+        }
+
+    }
+    cout << cnt << endl;
     
     return 0;
 }
