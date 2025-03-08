@@ -6,6 +6,7 @@
         "queue": "cpp",
         "cstring": "cpp",
         "vector": "cpp",
-        "unordered_map": "cpp"
+        "unordered_map": "cpp",
+        "set": "cpp"
     }
 }
