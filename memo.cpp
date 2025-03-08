@@ -1,90 +1,89 @@
 #include <iostream>
-<<<<<<< HEAD
 #include <vector>
 #include <algorithm>
 
 using namespace std;
 
-int N;
-vector<pair<int, int>> v;
-
-bool cmp(pair<int, int> a, pair<int, int> b)
+struct Edge
 {
-    return a.second < b.second;
-}
-=======
-#include <queue>
+    int u;
+    int v;
+    int weight;
 
-using namespace std;
-
-struct Pos
-{
-    int y;
-    int x;
-};
-
-struct cmd
-{
-    bool operator()(pair<int, Pos> a, pair<int, Pos> b)
+    bool operator<(const Edge &target) const
     {
-        return a.first > b.first;
+        return weight < target.weight;
     }
 };
 
-int N;
-int M;
->>>>>>> ac595b56b654fe9984fac7db7833291af9eecb47
+int parent[10001];
+vector<Edge> edges;
+int V;
+int E;
+
+int find(int x)
+{
+    if(parent[x] == x)
+    {
+        return x;
+    }
+
+    return parent[x] = find(parent[x]);
+}
+
+void unite(int a, int b)
+{
+    int rootA = find(a);
+    int rootB = find(b);
+
+    if(rootA != rootB)
+    {
+        parent[rootB] = rootA;
+    }
+}
+
+int Kruskal()
+{
+    int sumWeight = 0;
+    int cntEdges = 0;
+    for (int i = 0; i <= V; i++)
+    {
+        parent[i] = i;
+    }
+    
+
+    sort(edges.begin(), edges.end());
+
+    for(const auto &e : edges)
+    {
+        if(find(e.u) != find(e.v))
+        {
+            unite(e.u, e.v);
+            sumWeight += e.weight;
+            cntEdges++;
+
+            if(cntEdges == V-1)
+            {
+                break;
+            }
+        }
+    }
+
+    return sumWeight;
+}
 
 auto main() -> int
 {
-<<<<<<< HEAD
-    cin >> N;
-    for (int i = 0; i < N; i++)
+    cin >> V >> E;
+    for (int i = 0; i < E; i++)
     {
-        int a, b;
-        cin >> a >> b;
-        v.push_back({a, b});
+        int A, B, C;
+        cin >> A >> B >> C;
+        edges.push_back({A, B, C});
     }
-
-    sort(v.begin(), v.end(), cmp);
-
-
-    int src = 0, dst = 0;
-    int cnt = 0;
-    for(auto e : v)
-    {
-        src = e.first;
-
-        if(src >= dst)
-        {
-            cnt++;
-            dst = e.second;
-        }
-
-    }
-    cout << cnt << endl;
     
-=======
-    priority_queue<pair<int, Pos>, vector<pair<int, Pos>>, cmd> pq;
-    cin >> N >> M;
-    for (int i = 0; i < N + M; i++)
-    {
-        int B, Y, X;
-        cin >> B;
-        if(B == 0)
-        {
-            pq.top().second.y, pq.top().second.x;
-            pq.pop();
-        }
-        else
-        {
-            cin >> Y >> X;
-            pq.push({B, {Y, X}});
-        }
-    }
-
-        
-
->>>>>>> ac595b56b654fe9984fac7db7833291af9eecb47
+    cout << Kruskal() << endl;
+    
+    
     return 0;
 }
