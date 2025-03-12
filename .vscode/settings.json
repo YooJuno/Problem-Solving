@@ -3,6 +3,14 @@
         "iostream": "cpp",
         "ostream": "cpp",
         "algorithm": "c",
+<<<<<<< HEAD
         "ratio": "cpp"
+=======
+        "queue": "cpp",
+        "cstring": "cpp",
+        "vector": "cpp",
+        "unordered_map": "cpp",
+        "set": "cpp"
+>>>>>>> 2c6ecdc9f401e23fea6287fa834138513d44297a
     }
 }
