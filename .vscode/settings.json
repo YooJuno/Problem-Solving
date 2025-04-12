@@ -3,12 +3,21 @@
         "iostream": "cpp",
         "ostream": "cpp",
         "algorithm": "c",
+<<<<<<< HEAD
+        "ratio": "cpp"
+=======
         "queue": "cpp",
         "cstring": "cpp",
         "vector": "cpp",
         "unordered_map": "cpp",
+<<<<<<< HEAD
         "set": "cpp",
         "__locale": "cpp"
     },
     "cmake.ignoreCMakeListsMissing": true
+=======
+        "set": "cpp"
+>>>>>>> 2c6ecdc9f401e23fea6287fa834138513d44297a
+    }
+>>>>>>> 696f0879f9ad182108ee2cf483c2709b16c1d551
 }
