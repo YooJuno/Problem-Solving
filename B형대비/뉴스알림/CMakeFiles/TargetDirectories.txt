@@ -1,0 +1,3 @@
+/Users/juno/study/Problem Solving/B형대비/뉴스알림/CMakeFiles/my_program.dir
+/Users/juno/study/Problem Solving/B형대비/뉴스알림/CMakeFiles/edit_cache.dir
+/Users/juno/study/Problem Solving/B형대비/뉴스알림/CMakeFiles/rebuild_cache.dir
