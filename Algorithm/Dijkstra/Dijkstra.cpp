@@ -68,7 +68,7 @@ int main()
         cout << cur << ' ';
         cur = parent[cur];
     }
-    cout << endl;
+    cout << cur << endl;
     
     return 0;
 }
