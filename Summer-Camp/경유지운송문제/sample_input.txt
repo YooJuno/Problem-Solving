@@ -1,0 +1,43 @@
+1 100
+11
+100 CMD_INIT
+ number_of_city: 5  number_of_road: 2
+ city_id:   0  city_id:   1  limit: 50
+ city_id:   1  city_id:   4  limit: 90
+300 CMD_CALC
+ sender_city_id:   1  receiver_city_id:   4  number_of_stopover: 1
+ stopover_city_id: 3
+ answer: -1
+300 CMD_CALC
+ sender_city_id:   0  receiver_city_id:   4  number_of_stopover: 1
+ stopover_city_id: 1
+ answer: 50
+200 CMD_ADD
+ city_id:   3  city_id:   4  limit: 30
+300 CMD_CALC
+ sender_city_id:   0  receiver_city_id:   4  number_of_stopover: 1
+ stopover_city_id: 3
+ answer: 30
+200 CMD_ADD
+ city_id:   3  city_id:   1  limit: 60
+300 CMD_CALC
+ sender_city_id:   0  receiver_city_id:   4  number_of_stopover: 2
+ stopover_city_id: 3
+ stopover_city_id: 1
+ answer: 50
+300 CMD_CALC
+ sender_city_id:   0  receiver_city_id:   4  number_of_stopover: 3
+ stopover_city_id: 2
+ stopover_city_id: 3
+ stopover_city_id: 1
+ answer: -1
+200 CMD_ADD
+ city_id:   0  city_id:   2  limit: 80
+200 CMD_ADD
+ city_id:   2  city_id:   1  limit: 70
+300 CMD_CALC
+ sender_city_id:   0  receiver_city_id:   4  number_of_stopover: 3
+ stopover_city_id: 2
+ stopover_city_id: 3
+ stopover_city_id: 1
+ answer: 60
