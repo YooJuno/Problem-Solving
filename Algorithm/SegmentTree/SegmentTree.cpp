@@ -4,12 +4,16 @@
 #include <climits>
 using namespace std;
 
-int arr[] = {0, 1000, 3000, 1000, 500, 1000, 2000, 800, 1000};
+int arr[] = 
+{0, 1000, 3000, 1000, 500, 1000, 2000, 800, 1000};
 // 암기해주세요!!!!!! 4배로 만들면 안전하게 index 에러를 피할 수 있다.
 int segTree[4 * (sizeof(arr) / sizeof(int))];
+int mini = INT_MAX;
 
-int makeSeg(int index, int s, int e) {
-	if (s == e) {
+int makeSeg(int index, int s, int e) 
+{
+	if (s == e) 
+	{
 		segTree[index] = arr[s];
 		return segTree[index];
 	}
@@ -19,16 +23,17 @@ int makeSeg(int index, int s, int e) {
 	int right = makeSeg(index * 2 + 1, mid + 1, e);
 	// segTree[index] = min(left, right);
 	segTree[index] = left + right;
+	
 	return segTree[index];
 }
 
-// return 을 하지 않는 방식
-int mini = INT_MAX;
 
-void querySeg(int index, int s, int e, int ts, int te) {
+void querySeg(int index, int s, int e, int ts, int te) 
+{
 	// 1. 현재 바라보고 있는 범위가 완벽하게 target 의 범위에 포함된다면
 	//    -> 해당 위치에 저장된 값을 그대로 return
-	if (ts <= s && e <= te) {
+	if (ts <= s && e <= te) 
+	{
 		mini = min(mini, segTree[index]);
 		return;
 	}
@@ -43,7 +48,8 @@ void querySeg(int index, int s, int e, int ts, int te) {
 	querySeg(index * 2 + 1, mid + 1, e, ts, te);	// 오른쪽
 }
 
-int updateSeg(int index, int s, int e, int targetIndex, int targetValue) {
+int updateSeg(int index, int s, int e, int targetIndex, int targetValue) 
+{
 	// 리프 노드인지 비교할 때 s == e 조건문을 써도 된다.
 	// 다만, 이 때 범위밖을 먼저 검사 한 후 써야한다.
 	// 즉, 아래처럼 위로 오면 버그난다!!!
@@ -55,7 +61,8 @@ int updateSeg(int index, int s, int e, int targetIndex, int targetValue) {
 
 	// 2. 변경할 리프 노드를 찾았다면
 	// if (s == e) {}
-	if (s == targetIndex && e == targetIndex) {
+	if (s == targetIndex && e == targetIndex) 
+	{
 		arr[targetIndex] = targetValue;
 		segTree[index] = targetValue;
 		return segTree[index];
@@ -67,10 +74,12 @@ int updateSeg(int index, int s, int e, int targetIndex, int targetValue) {
 	int right = updateSeg(index * 2 + 1, mid + 1, e, targetIndex, targetValue);
 	// 데이터 변경이 끝남 -> 돌아오면서 갱신해야 한다!!
 	segTree[index] = min(left, right);
+
 	return segTree[index];
 }
 
-int main() {
+int main() 
+{
 	int n = sizeof(arr) / sizeof(int) - 1;
 	makeSeg(1, 1, n);
 
@@ -80,7 +89,6 @@ int main() {
 	// int result = querySeg(1, 1, n, targetStart, targetEnd);
 	// cout << result << endl;
 
-	// 전역 변수 방식
 	mini = INT_MAX;
 	querySeg(1, 1, n, targetStart, targetEnd);
 	cout << mini << endl;
@@ -94,5 +102,6 @@ int main() {
 	cout << mini << endl;
 
 	int del = 1;
+
 	return 0;
 }
